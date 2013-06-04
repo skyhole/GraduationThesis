@@ -1,0 +1,23 @@
+function [yjz]=yujiazhong2(s,fs,nbits)
+%[s,fs,nbits]=wavread('2.wav');
+tisheng=filter([1,-0.7],[1],s);
+N=length(s);
+t=(0:N-1)/fs;
+f=(0:N-1)*fs/N;%频率轴
+y=abs(fft(s));
+ytisheng=abs(fft(tisheng));
+f=f(1:int32(N/2));
+y=y(1:int32(N/2));
+ytisheng=ytisheng(1:int32(N/2));
+subplot(2,2,1)
+plot(t,s)
+title('原始时域信号')
+subplot(2,2,3)
+plot(t,tisheng)
+title('提升后时域信号')
+subplot(2,2,2)
+plot(f,y)
+title('原始信号频谱')
+subplot(2,2,4);
+plot(f,ytisheng);
+title('提升后信号频谱')
